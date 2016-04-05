@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cadastro de Contrato de Treinamento</title>
+</h:head>
+
+<h:body>
+
+	<h1>Cadastro de Contrato de Treinamento</h1>
+	<p:separator />
+	<h:form>
+		<p:growl id="growl" showDetail="true"/>
+		<p:tabView>
+			<p:tab title="Dados Pessoais">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Razão Social" for="razaoSocial" />
+					<p:inputText id="razaoSocial"
+						value="#{cadastroContratoTreinamentoBean.razaoSocial}" required="true"/>
+
+					<p:outputLabel value="CNPJ" for="cnpj" />
+					<p:inputMask mask="99.999.999/9999-99" id="cnpj"
+						value="#{cadastroContratoTreinamentoBean.cnpj}" required="true"/>
+
+					<p:outputLabel value="Cidade do Contrato" for="cidadeContrato" required="true"/>
+					<p:inputText id="cidadeContrato"
+						value="#{cadastroContratoTreinamentoBean.cidadeContrato}" required="true"/>
+
+					<p:outputLabel value="Modalidade" for="modalidade" />
+					<p:selectOneRadio id="modalidade"
+						value="#{cadastroContratoTreinamentoBean.modalidade}" required="true">
+						<f:selectItem itemLabel="EAD" />
+						<f:selectItem itemLabel="Presencial" />
+					</p:selectOneRadio>
+				</p:panelGrid>
+			</p:tab>
+
+			<p:tab title="Contrato">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Data Contrato" for="dataContrato" />
+					<p:calendar pattern="dd/MM/yyyy" id="dataContrato" locale="pt" value="#{ cadastroContratoTreinamentoBean.dataContrato}" required="true"/>
+					
+					<p:outputLabel value="Valor do Contrato" for="valorContrato"/>
+					<p:inputText id="valorContrato" value="#{cadastroContratoTreinamentoBean.valorContrato}" required="true"/>
+					
+					<p:outputLabel value="Método de Pagamento" for="metodoPagamento"/>
+					<p:selectOneMenu id="metodoPagamento" value="#{cadastroContratoTreinamentoBean.metodoPagamento}" required="true">
+						<f:selectItem itemLabel="-Selecione-"/>
+						<f:selectItem itemLabel="Boleto" itemValue="1"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Forma de Pagamento" for="formaPagamento"/>
+					<p:selectOneMenu id="formaPagamento" value="#{cadastroContratoTreinamentoBean.formaPagamento}" required="true">
+						<f:selectItem itemLabel="-Selecione-"/>
+						<f:selectItem itemLabel="À vista" itemValue="2"/>
+					</p:selectOneMenu>
+					
+				</p:panelGrid>
+			</p:tab>
+			
+			<p:tab title="Curso">
+				<p:selectManyCheckbox value="#{cadastroContratoTreinamentoBean.cursos}" layout="pageDirection" required="true">
+					<f:selectItem itemLabel="Fundamentos Java e Orientação a Objetos" itemValue="1"/>
+					<f:selectItem itemLabel="Desenvolvimento Web com JSF 2" itemValue="2"/>
+					<f:selectItem itemLabel="Persistência de Dados com JPA 2 e Hibernete" itemValue="3"/>
+					<f:selectItem itemLabel="Gerenciamento Ágil de Projetos com Scrum"/>
+				</p:selectManyCheckbox>
+			</p:tab>
+
+		</p:tabView>
+		
+		<div>
+			<p:commandButton value="Cadastrar" actionListener="#{cadastroContratoTreinamentoBean.Cadastrar}" update="@form"/>
+		</div>
+		
+	</h:form>
+</h:body>
+
+	<script>
+	PrimeFaces.locales['pt'] = { closeText: 'Fechar', prevText: 'Anterior', nextText: 'Próximo', currentText: 'Começo', monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'], monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'], dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'], dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'], dayNamesMin: ['D','S','T','Q','Q','S','S'], weekHeader: 'Semana', firstDay: 0, isRTL: false, showMonthAfterYear: false, yearSuffix: '', timeOnlyTitle: 'Só Horas', timeText: 'Tempo', hourText: 'Hora', minuteText: 'Minuto', secondText: 'Segundo', ampm: false, month: 'Mês', week: 'Semana', day: 'Dia', allDayText : 'Todo o Dia' };
+	</script>
+
+</html>
